@@ -1,0 +1,38 @@
+{
+  "name": "arboris",
+  "version": "0.1.0",
+  "description": "Hassle-free combination of mobx-state-tree and server-side rendering.",
+  "main": "build/index.node.js",
+  "browser": "build/index.web.js",
+  "repository": "https://github.com/d4rky-pl/arboris",
+  "author": "Michał Matyas",
+  "license": "MIT",
+  "files": [
+    "build",
+    "src",
+    "index.js"
+  ],
+  "scripts": {
+    "prepublish": "webpack"
+  },
+  "peerDependencies": {
+    "mobx-state-tree": "^1.1.0",
+    "react": ">= 15",
+    "react-dom": ">= 15"
+  },
+  "dependencies": {
+    "detect-node": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.10.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "lodash.merge": "^4.6.0",
+    "webpack": "^3.8.1"
+  }
+}
