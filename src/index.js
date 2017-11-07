@@ -37,7 +37,7 @@ export default function () {
       return async function(...args) {
         try {
           tracker.add(fn)
-          return fn(...args)
+          return await fn(...args)
         } catch(e) {
           throw e
         } finally {
