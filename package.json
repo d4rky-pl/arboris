@@ -1,8 +1,8 @@
 {
   "name": "arboris",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Hassle-free combination of mobx-state-tree and server-side rendering.",
-  "main": "build/index.node.js",
+  "main": "build/index.js",
   "browser": "build/index.web.js",
   "repository": "https://github.com/d4rky-pl/arboris",
   "author": "Michał Matyas",
@@ -10,10 +10,13 @@
   "files": [
     "build",
     "src",
-    "index.js"
+    "mst.js",
+    "mst.web.js",
+    "index.js",
+    "index.web.js"
   ],
   "scripts": {
-    "prepublish": "webpack"
+    "prepare": "webpack"
   },
   "peerDependencies": {
     "mobx-state-tree": "^1.1.0",

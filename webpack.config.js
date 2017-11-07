@@ -1,26 +1,21 @@
 const path = require('path');
 const merge = require('lodash.merge')
 
+
 const nodeBabel = {
   loader: 'babel-loader',
-  options: {
-    presets: [ ['env', { targets: { "node": "current" } }] ]
-  }
+  options: { presets: [ ['env', { targets: { "node": "current" } }] ] }
 }
 
 const browserBabel = {
   loader: 'babel-loader',
-  options: {
-    presets: [ ['env', { targets: { "browsers": "last 2 versions, > 5%" } }] ]
-  }
+  options: { presets: [ ['env', { targets: { "browsers": "last 2 versions, > 5%" } }] ] }
 }
 
-const config = {
-  entry: __dirname + '/index.js',
+const defaultConfig = {
   devtool: 'source-map',
   output: {
-    path: __dirname + '/build',
-    filename: 'index.node.js',
+    path: __dirname,
     library: 'arboris',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -37,7 +32,7 @@ const config = {
         use: nodeBabel
       },
       {
-        test: /(\.js)$/,
+        test: /src\/(\.js)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
       }
@@ -49,8 +44,20 @@ const config = {
   }
 }
 
-const browserConfig = merge({}, config)
-browserConfig.output.filename = 'index.web.js'
-browserConfig.module.rules[0].use = browserBabel
+const makeConfig = function(entry, target) {
+  const newConfig = merge({}, defaultConfig)
+  newConfig.entry = `${__dirname}/src/${entry}.js`
+  newConfig.target = target
+  
+  if(target === 'node') {
+    newConfig.output.filename = `${entry}.js`
+    newConfig.module.rules[0].use = nodeBabel
+  } else {
+    newConfig.output.filename = `${entry}.${target}.js`
+    newConfig.module.rules[0].use = browserBabel
+  }
+  
+  return newConfig
+}
 
-module.exports = [ config, browserConfig ]
+module.exports = [ makeConfig('index', 'node'), makeConfig('index', 'web') ]
