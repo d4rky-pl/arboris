@@ -118,15 +118,8 @@ const SessionStore = types
     ready: types.optional(types.boolean, false)
   })
   .actions(self => {
-    const { apiClient } = getEnv(self)
-    const flow = getTrackedFlow(self)
-
     return {
-      // This is where the magic happens (again):
-      // We use flow() from MST for asynchronous actions but it's additionally
-      // wrapped in the track() function.
-      // `getTrackedFlow` is syntactic sugar for getEnv(self).track(flow(fn))
-      // Promises are not tracked in browser (track returns passed function)
+      // Remember to use flow() for asynchronous actions!
       signIn: flow(function* signIn(email, password) {
         yield apiClient.requestOauthToken(email, password)
       })
