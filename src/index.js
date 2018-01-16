@@ -53,11 +53,11 @@ export default function () {
         await tracker.wait(timeout)
         return await renderMethod(markup)
       } catch(e) {
-        if(e === tracker.TIMEOUT) {
+        if(e === Tracker.TIMEOUT) {
           console.error(
             "[arboris] Asynchronous methods have not finished in " + timeout + "ms.\n" +
             "Make sure that all Promises and flows are resolved to prevent memory leaks.\n\n" +
-            "Unfinished flows and methods:\n" + tracker.unfinished().join("\n")
+            "Unfinished flows and methods:\n" + Array.from(tracker.unfinished()).join("\n")
           )
 
           return prerender
