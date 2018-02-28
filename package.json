@@ -15,7 +15,13 @@
     "index.web.js"
   ],
   "scripts": {
-    "prepare": "webpack"
+    "prepare": "webpack",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/jest.transform.js"
+    }
   },
   "peerDependencies": {
     "mobx-state-tree": "^1.1.0",
@@ -28,13 +34,20 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.10.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.1.4",
     "lodash.merge": "^4.6.0",
+    "mobx": "^3.4.1",
+    "mobx-state-tree": "^1.1.0",
+    "react": ">= 15",
+    "react-dom": ">= 15",
+    "sinon": "^4.2.1",
     "webpack": "^3.8.1"
   }
 }
