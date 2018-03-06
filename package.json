@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "prepare": "webpack",
-    "test": "jest"
+    "test": "jest",
+    "test-debug": "node --inspect-brk ./node_modules/.bin/jest -i"
   },
   "jest": {
     "transform": {
