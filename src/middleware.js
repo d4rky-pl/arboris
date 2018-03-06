@@ -1,6 +1,10 @@
+const getArborisOpts = (call) => (
+  (call.context && call.context.$arboris && call.context.$arboris[call.name]) || null
+)
+
 export default function createMiddleware(tracker, logger) {
   return function (call, next) {
-    const opts = ((call.context && call.context.$arboris) || {})[call.name]
+    const opts = getArborisOpts(call)
 
     if(opts && opts.type === 'async' && tracker.renderLimitReached()) {
       return false

@@ -63,7 +63,6 @@ class Tracker {
           timeLeft = timeLeft - Math.round((currentTime - Date.now()) / 1000)
 
           if(timeLeft > 0) {
-            // timeout = setTimeout(() => this.promise.reject(TIMEOUT), timeLeft)
             currentTime = Date.now()
             this.depthLevel += 1
           } else {
