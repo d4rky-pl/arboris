@@ -3,13 +3,13 @@ import { makePromise } from './utils'
 const TIMEOUT = new Error('Tracker timeout')
 
 class Tracker {
-  constructor(renderLimit, timeLimit, warnOnMaxDepth, logger) {
+  constructor({ renderLimit, timeLimit, warnOnMaxLimit, logger }) {
     this.collection = new Map()
 
     this.renderLimit = renderLimit
     this.depthLevel = 1
     this.timeLimit = timeLimit
-    this.warnOnMaxDepth = warnOnMaxDepth
+    this.warnOnMaxLimit = warnOnMaxLimit
     this.logger = logger
   }
   
@@ -74,7 +74,7 @@ class Tracker {
           break
         }
       }
-      if(this.warnOnMaxDepth && this.renderLimitReached()) {
+      if(this.warnOnMaxLimit && this.renderLimitReached()) {
         this.logger.warn(
           "[arboris] Depth limit has been hit on this request and yet there are still unfinished flows and methods.\n" +
           "Double-check if you're not falling into an infinite loop.\n\n" +

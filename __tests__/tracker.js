@@ -6,8 +6,8 @@ const fn = () => {}
 const name = Date.now()
 
 const sandbox = sinon.createSandbox()
-const newTracker = ({ renderLimit = 10, timeout = 25000, logger = console } = {}) =>
-  new Tracker(renderLimit, timeout, true, logger)
+const newTracker = ({ renderLimit = 10, timeLimit = 25000, warnOnMaxLimit = true, logger = console } = {}) =>
+  new Tracker({ renderLimit, timeLimit, warnOnMaxLimit, logger })
 
 describe('tracker.js', () => {
   afterEach(() => sandbox.restore())
@@ -99,7 +99,7 @@ describe('tracker.js', () => {
 
   it('stops waiting for render loop when timeout is reached', async () => {
     const logger = { error: sandbox.spy() }
-    const tracker = newTracker({ timeout: 500, logger })
+    const tracker = newTracker({ timeLimit: 500, logger })
     tracker.add(fn)
     const renderMethod = () => { setTimeout(() => tracker.remove(fn), 1000) }
 

@@ -4,12 +4,12 @@ import createMiddleware from './middleware'
 
 function Arboris({
   maxDepth = 10,
-  warnOnMaxDepth = true,
+  warnOnMaxLimit = true,
   timeout = 25000,
   logger = console,
   renderMethod = (markup) => renderToString(markup)
 } = {}) {
-  const tracker = new Tracker(maxDepth, timeout, warnOnMaxDepth, logger)
+  const tracker = new Tracker(maxDepth, timeout, warnOnMaxLimit, logger)
 
   return {
     middleware: createMiddleware(tracker, logger),
