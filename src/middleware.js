@@ -1,6 +1,11 @@
 export default function createMiddleware(tracker, logger) {
   return function (call, next) {
-    console.log(call)
+    const opts = ((call.context && call.context.$arboris) || {})[call.name]
+
+    if(opts && opts.type === 'async' && tracker.renderLimitReached()) {
+      return false
+    }
+
     if(call.type === 'flow_spawn') {
       tracker.add(call.id, call.name)
     }
@@ -16,8 +21,6 @@ export default function createMiddleware(tracker, logger) {
       }
     }
 
-    if(call.type === 'action' || !tracker.depthLimitReached()) {
-      return next(call);
-    }
+    return next(call)
   }
 }
