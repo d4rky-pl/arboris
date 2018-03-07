@@ -7,7 +7,7 @@ class Tracker {
     this.collection = new Map()
 
     this.renderLimit = renderLimit
-    this.depthLevel = 1
+    this.renderCycle = 1
     this.timeLimit = timeLimit
     this.warnOnMaxLimit = warnOnMaxLimit
     this.logger = logger
@@ -37,7 +37,7 @@ class Tracker {
   }
   
   renderLimitReached() {
-    return this.depthLevel >= this.renderLimit
+    return this.renderCycle >= this.renderLimit
   }
   
   unfinished() {
@@ -64,7 +64,7 @@ class Tracker {
 
           if(timeLeft > 0) {
             currentTime = Date.now()
-            this.depthLevel += 1
+            this.renderCycle += 1
           } else {
             throw TIMEOUT
           }
@@ -75,7 +75,7 @@ class Tracker {
       }
       if(this.warnOnMaxLimit && this.renderLimitReached()) {
         this.logger.warn(
-          "[arboris] Depth limit has been hit on this request and yet there are still unfinished flows and methods.\n" +
+          "[arboris] Render limit has been hit on this request and yet there are still unfinished flows and methods.\n" +
           "Double-check if you're not falling into an infinite loop.\n\n" +
           "Unfinished flows and methods:\n" + this.unfinished().join("\n")
         )
