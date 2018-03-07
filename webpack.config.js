@@ -50,10 +50,10 @@ const makeConfig = function(entry, target) {
   newConfig.target = target
   
   if(target === 'node') {
-    newConfig.output.filename = `${entry}.js`
+    newConfig.output.filename = `lib/${entry}.js`
     newConfig.module.rules[0].use = nodeBabel
   } else {
-    newConfig.output.filename = `${entry}.${target}.js`
+    newConfig.output.filename = `lib/${entry}.${target}.js`
     newConfig.module.rules[0].use = browserBabel
   }
   
