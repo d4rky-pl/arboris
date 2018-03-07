@@ -73,7 +73,7 @@ describe('middleware.js', () => {
      expect(logger.error.calledOnce).toBe(true)
    })
 
-   it('calls next function if depth limit has not been reached', () => {
+   it('calls next function if render limit has not been reached', () => {
      const tracker = {
        has: trueFn,
        add: noop,
@@ -88,7 +88,7 @@ describe('middleware.js', () => {
      expect(next.calledOnce).toBe(true)
    })
 
-   it('does not call next function if depth limit has been reached', () => {
+   it('does not call next function if render limit has been reached', () => {
      const tracker = {
        has: trueFn,
        add: noop,
@@ -103,7 +103,7 @@ describe('middleware.js', () => {
      expect(next.notCalled).toBe(true)
    })
 
-   it('does not block non-flow functions if depth limit has been reached', () => {
+   it('does not block non-flow functions if render limit has been reached', () => {
      const tracker = {
        has: trueFn,
        renderLimitReached: trueFn

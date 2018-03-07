@@ -81,11 +81,11 @@ describe('tracker.js', () => {
     const result = await tracker.wait(renderMethod)
 
     expect(result).toBe('<div>success</div>')
-    expect(tracker.depthLevel).toBe(1)
+    expect(tracker.renderCycle).toBe(1)
     expect(logger.error.notCalled).toBe(true)
   })
 
-  it('increases depth limit when there are unfinished flows after render', async () => {
+  it('increases render limit when there are unfinished flows after render', async () => {
     const logger = { error: sandbox.spy() }
     const tracker = newTracker({ logger })
     tracker.add(fn)
@@ -93,11 +93,11 @@ describe('tracker.js', () => {
 
     await tracker.wait(renderMethod)
 
-    expect(tracker.depthLevel).toBe(2)
+    expect(tracker.renderCycle).toBe(2)
     expect(logger.error.notCalled).toBe(true)
   })
 
-  it('stops waiting for render loop when timeout is reached', async () => {
+  it('stops waiting for render loop when timeLimit is reached', async () => {
     const logger = { error: sandbox.spy() }
     const tracker = newTracker({ timeLimit: 500, logger })
     tracker.add(fn)
