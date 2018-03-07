@@ -2,17 +2,16 @@
   "name": "arboris",
   "version": "0.2.1",
   "description": "Hassle-free combination of mobx-state-tree and server-side rendering.",
-  "main": "build/index.js",
-  "browser": "build/index.web.js",
+  "main": "lib/index.js",
+  "browser": "lib/index.web.js",
   "module": "src/index.js",
   "repository": "https://github.com/d4rky-pl/arboris",
   "author": "Michał Matyas",
   "license": "MIT",
   "files": [
-    "build",
-    "src",
-    "index.js",
-    "index.web.js"
+    "lib",
+    "lib/index.js",
+    "lib/index.web.js"
   ],
   "scripts": {
     "prepare": "webpack",
