@@ -48,7 +48,7 @@ const makeConfig = function(entry, target) {
   const newConfig = merge({}, defaultConfig)
   newConfig.entry = `${__dirname}/src/${entry}.js`
   newConfig.target = target
-  
+
   if(target === 'node') {
     newConfig.output.filename = `lib/${entry}.js`
     newConfig.module.rules[0].use = nodeBabel
@@ -60,4 +60,9 @@ const makeConfig = function(entry, target) {
   return newConfig
 }
 
-module.exports = [ makeConfig('index', 'node'), makeConfig('index', 'web') ]
+module.exports = [
+  makeConfig('index', 'node'),
+  makeConfig('index', 'web'),
+  makeConfig('track', 'node'),
+  makeConfig('track', 'web')
+]
