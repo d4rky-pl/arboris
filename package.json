@@ -1,6 +1,6 @@
 {
   "name": "arboris",
-  "version": "1.0.rc1",
+  "version": "1.0.0-rc1",
   "description": "Hassle-free combination of mobx-state-tree and server-side rendering.",
   "main": "lib/index.js",
   "browser": "lib/index.web.js",
