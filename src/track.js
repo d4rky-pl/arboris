@@ -4,6 +4,6 @@ const track = (model, config) => {
   }))
 }
 
-track.async = (opts = {}) => Object.assign({}, { type: 'async' }, opts)
+track.async = (opts = {}) => Object.assign({}, { type: "async" }, opts)
 
 export default track
