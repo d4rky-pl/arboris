@@ -1,21 +1,29 @@
 {
   "name": "arboris",
-  "version": "0.2.1",
+  "version": "1.0.0-rc1",
   "description": "Hassle-free combination of mobx-state-tree and server-side rendering.",
-  "main": "build/index.js",
-  "browser": "build/index.web.js",
-  "module": "src/index.js",
+  "main": "lib/index.js",
+  "browser": "lib/index.web.js",
   "repository": "https://github.com/d4rky-pl/arboris",
   "author": "Michał Matyas",
   "license": "MIT",
-  "files": [
-    "build",
-    "src",
-    "index.js",
-    "index.web.js"
-  ],
   "scripts": {
-    "prepare": "webpack"
+    "prepare": "webpack",
+    "test": "jest",
+    "test-debug": "node --inspect-brk ./node_modules/.bin/jest -i",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/jest.transform.js"
+    }
   },
   "peerDependencies": {
     "mobx-state-tree": "^1.1.0",
@@ -28,13 +36,26 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.10.0",
+    "eslint-config-prettier": "2.9.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "21.14.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "husky": "0.14.3",
+    "jest": "^22.1.4",
+    "lint-staged": "7.0.0",
     "lodash.merge": "^4.6.0",
+    "mobx": "^3.4.1",
+    "mobx-state-tree": "^1.1.0",
+    "prettier": "1.11.1",
+    "react": ">= 15",
+    "react-dom": ">= 15",
+    "sinon": "^4.2.1",
     "webpack": "^3.8.1"
   }
 }

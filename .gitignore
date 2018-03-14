@@ -1,8 +1,4 @@
 node_modules
 .idea
 .DS_Store
-/build
-/index.js
-/index.js.map
-/index.web.js
-/index.web.js.map
+/lib
