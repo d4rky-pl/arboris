@@ -1,6 +1,6 @@
-import { makePromise } from './utils'
+import { makePromise } from "./utils"
 
-const TIMEOUT = new Error('Tracker timeout')
+const TIMEOUT = new Error("Tracker timeout")
 
 class Tracker {
   constructor({ renderLimit, timeLimit, warnOnMaxLimit, logger }) {
@@ -12,57 +12,57 @@ class Tracker {
     this.warnOnMaxLimit = warnOnMaxLimit
     this.logger = logger
   }
-  
+
   add(obj, label) {
-    if(typeof label === 'undefined') {
-      if(typeof obj.name !== 'undefined' && obj.name !== "") {
+    if (typeof label === "undefined") {
+      if (typeof obj.name !== "undefined" && obj.name !== "") {
         label = obj.name
       } else {
         label = obj.toString()
       }
     }
-    
+
     this.collection.set(obj, label)
   }
-  
+
   remove(obj) {
     this.collection.delete(obj)
-    if(this.collection.size === 0 && this.promise) {
+    if (this.collection.size === 0 && this.promise) {
       this.promise.resolve()
     }
   }
-  
+
   has(obj) {
     return this.collection.has(obj)
   }
-  
+
   renderLimitReached() {
     return this.renderCycle >= this.renderLimit
   }
-  
+
   unfinished() {
     return Array.from(this.collection.values())
   }
-  
+
   async wait(renderMethod) {
     let timeLeft = this.timeLimit
     let currentTime = Date.now()
     let result
-    
+
     try {
-      while(!this.renderLimitReached()) {
+      while (!this.renderLimitReached()) {
         this.promise = makePromise()
         let timeout = setTimeout(() => this.promise.reject(TIMEOUT), timeLeft)
-  
+
         result = renderMethod()
 
-        if(this.collection.size > 0) {
+        if (this.collection.size > 0) {
           await this.promise
 
           clearTimeout(timeout)
           timeLeft = timeLeft - Math.round((currentTime - Date.now()) / 1000)
 
-          if(timeLeft > 0) {
+          if (timeLeft > 0) {
             currentTime = Date.now()
             this.renderCycle += 1
           } else {
@@ -73,29 +73,33 @@ class Tracker {
           break
         }
       }
-      if(this.warnOnMaxLimit && this.renderLimitReached()) {
+      if (this.warnOnMaxLimit && this.renderLimitReached()) {
         this.logger.warn(
           "[arboris] Render limit has been hit on this request and yet there are still unfinished flows and methods.\n" +
-          "Double-check if you're not falling into an infinite loop.\n\n" +
-          "Unfinished flows and methods:\n" + this.unfinished().join("\n")
+            "Double-check if you're not falling into an infinite loop.\n\n" +
+            "Unfinished flows and methods:\n" +
+            this.unfinished().join("\n")
         )
       }
-    } catch(e) {
-      if(e === TIMEOUT) {
+    } catch (e) {
+      if (e === TIMEOUT) {
         this.logger.error(
-          "[arboris] Asynchronous methods have not finished in " + this.timeLimit + "ms.\n" +
-          "Make sure that all Promises and flows are resolved to prevent memory leaks.\n\n" +
-          "Unfinished flows and methods:\n" + this.unfinished().join("\n")
+          "[arboris] Asynchronous methods have not finished in " +
+            this.timeLimit +
+            "ms.\n" +
+            "Make sure that all Promises and flows are resolved to prevent memory leaks.\n\n" +
+            "Unfinished flows and methods:\n" +
+            this.unfinished().join("\n")
         )
       } else {
         this.logger.error(
           "[arboris] Your store has thrown an uncaught exception.\n" +
-          "Make sure you're catching and handling all exceptions properly."
+            "Make sure you're catching and handling all exceptions properly."
         )
         throw e
       }
     }
-    
+
     return result
   }
 }
