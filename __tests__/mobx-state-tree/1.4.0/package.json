@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "mobx-state-tree": "^1.4.0"
+  }
+}
