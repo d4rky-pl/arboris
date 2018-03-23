@@ -32,6 +32,7 @@ Let us know about any issues you encounter and ideas you would like to see in ne
 
 ## Testing
 
-Arboris is being testing against various MST versions. in `jest.beforeload.js` 
-you can define which versions of MST will be installed when running tests.
-If you want to add MST-dependent tests, add them to `__tests__/mobx-state-tree/[mstVersion]` directory and update `jest.beforeload.js` file.
+Just run `yarn test` or `npm test`.
+
+Arboris is being testing against various MST versions. `jest.setup.js` script is taking care of installing it locally when running tests.
+If you want to add MST-dependent tests, add them to `__tests__/mobx-state-tree/[mstVersion]` directory and update `jest.setup.js` file.

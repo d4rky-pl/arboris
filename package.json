@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "webpack",
-    "test": "jest",
+    "test": "node jest.setup.js && jest",
     "test-debug": "node --inspect-brk ./node_modules/.bin/jest -i",
     "precommit": "lint-staged"
   },
@@ -23,10 +23,7 @@
   "jest": {
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
-    },
-    "setupFiles": [
-      "<rootDir>/jest.beforeload.js"
-    ]
+    }
   },
   "peerDependencies": {
     "mobx-state-tree": ">= 1.2.1",
