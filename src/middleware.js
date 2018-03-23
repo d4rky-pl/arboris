@@ -3,11 +3,11 @@ const getArborisOpts = call =>
   null
 
 export default function createMiddleware(tracker, logger) {
-  return function(call, next) {
+  return function(call, next, abort) {
     const opts = getArborisOpts(call)
 
     if (opts && opts.type === "async" && tracker.renderLimitReached()) {
-      return false
+      return typeof abort === "function" ? abort(null) : null
     }
 
     if (call.type === "flow_spawn") {
@@ -24,6 +24,7 @@ export default function createMiddleware(tracker, logger) {
             ").\n" +
             "Make sure you're applying Arboris middleware before running any actions."
         )
+        return typeof abort === "function" ? abort(null) : null
       } else {
         tracker.remove(call.id)
       }
