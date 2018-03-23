@@ -1,5 +1,5 @@
 const execSync = require("child_process").execSync
-const mstVersions = ["1.2.1", "1.4.0"]
+const mstVersions = ["1.2.1", "1.3.1", "1.4.0", "2.0.1"]
 
 mstVersions.forEach(function(version) {
   execSync(
