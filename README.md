@@ -28,4 +28,10 @@ Here are some projects, where you can see MST in action:
 ## Roadmap
 
 See [issues](https://github.com/d4rky-pl/arboris/issues).
-Let us know about any issues you encounter and ideas you would like to see in next releases.  
+Let us know about any issues you encounter and ideas you would like to see in next releases.
+
+## Testing
+
+Arboris is being testing against various MST versions. in `jest.beforeload.js` 
+you can define which versions of MST will be installed when running tests.
+If you want to add MST-dependent tests, add them to `__tests__/mobx-state-tree/[mstVersion]` directory and update `jest.beforeload.js` file.

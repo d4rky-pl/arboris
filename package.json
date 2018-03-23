@@ -23,7 +23,10 @@
   "jest": {
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
-    }
+    },
+    "setupFiles": [
+      "<rootDir>/jest.beforeload.js"
+    ]
   },
   "peerDependencies": {
     "mobx-state-tree": ">= 1.2.1",
